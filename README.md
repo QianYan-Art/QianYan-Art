@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=28&pause=1200&color=8CA4FF&center=true&vCenter=true&width=760&lines=Hi+there%2C+I%27m+QianYan;AI+Applications+%26+Workflow+Design;Turning+small+ideas+into+real+projects;Soft+style%2C+serious+craft" alt="Typing Title" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=28&pause=1200&color=8CA4FF&center=true&vCenter=true&repeat=true&width=760&lines=Hi+there%2C+I%27m+QianYan" alt="Typing Title" />
 
-<p><em>疏影横斜水清浅，写给代码，也写给月色。</em></p>
+<p><em>疏影横斜水清浅，暗香浮动月黄昏。</em></p>
 
 <p>
   <img src="https://img.shields.io/badge/AI%20Applications-F6F1FF?style=flat-square&labelColor=F6F1FF&color=D8CCFF" alt="AI Applications" />
@@ -67,5 +67,5 @@ Brings character settings, skill expression, and interaction logic into one smal
 ---
 
 <div align="center">
-If you also like technical work that feels light, warm, and quietly expressive, welcome to explore my projects.
+  <img src="./assets/ending-banner.png" alt="未完待续" />
 </div>
