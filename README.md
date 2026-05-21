@@ -35,20 +35,20 @@
 
 ## Featured Projects
 
-### [translate-workflow](https://github.com/QianYan-Art/translate-workflow)
-`Python` `Workflow`
+### [SafetyRAISE-OS](https://github.com/QianYan-Art/SafetyRAISE-OS)
+`System Design` `Safety`
 
-Organizes repetitive translation tasks into a smoother workflow, so content handling feels less like mechanical copying and more like an actual process.
+A safety-oriented project that explores how system structure, coordination, and operational thinking can be shaped into a more resilient workflow for real use.
 
 ### [realtime-chat-app](https://github.com/QianYan-Art/realtime-chat-app)
 `JavaScript` `Realtime`
 
-A practice project built around realtime communication and frontend interaction, focused not just on “making chat work” but on understanding responsiveness and application structure.
+A realtime communication project centered on frontend interaction and responsiveness, built to understand how smooth messaging experiences and application structure should work together.
 
-### [Character-skills](https://github.com/QianYan-Art/Character-skills)
-`Creative Coding` `Experiment`
+### [translate-workflow](https://github.com/QianYan-Art/translate-workflow)
+`Python` `Workflow`
 
-Brings character settings, skill expression, and interaction logic into one small experiment, exploring how creative ideas can become systems that are actually buildable.
+Turns repetitive translation tasks into a cleaner and more deliberate workflow, making content handling feel less mechanical and much easier to carry through from start to finish.
 
 <!-- Illustration slot reserved for a future transition image -->
 
@@ -67,5 +67,5 @@ Brings character settings, skill expression, and interaction logic into one smal
 ---
 
 <div align="center">
-  <img src="./assets/ending-banner.png" alt="未完待续" />
+  <img src="./assets/ending-banner.png" alt="To Be Continued" />
 </div>
