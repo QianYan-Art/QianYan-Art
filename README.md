@@ -36,19 +36,19 @@
 ## Featured Projects
 
 ### [SafetyRAISE-OS](https://github.com/QianYan-Art/SafetyRAISE-OS)
-`System Design` `Safety`
+`React` `FastAPI` `Agentic RAG`
 
-A safety-oriented project that explores how system structure, coordination, and operational thinking can be shaped into a more resilient workflow for real use.
+A road-traffic accident analysis and report generation system. It carries accident photos and videos through a full pipeline — structured accident info, expert guidance, retrieval-augmented analysis, and exportable documents — with a YOLO + ByteTrack video path and per-user model configuration, built for local debugging, private deployment, and secondary development.
 
-### [realtime-chat-app](https://github.com/QianYan-Art/realtime-chat-app)
-`JavaScript` `Realtime`
+### [SafetyRAISE-LMEngine](https://github.com/QianYan-Art/SafetyRAISE-LMEngine)
+`Rust` `LLM Inference`
 
-A realtime communication project centered on frontend interaction and responsiveness, built to understand how smooth messaging experiences and application structure should work together.
+A minimal large-model inference engine written from scratch in Rust (crate `rsinfer`), tuned for a fine-tuned Qwen3-4B-Thinking and serving as the expert small model behind SafetyRAISE. It reimplements every stage of transformer inference — weight loading, tensor ops, attention, KV cache, sampling — in readable code, with a hybrid CPU/GPU path for hands-on understanding rather than production speed.
 
-### [translate-workflow](https://github.com/QianYan-Art/translate-workflow)
-`Python` `Workflow`
+### [maintenance](https://github.com/QianYan-Art/maintenance)
+`Rust` `CLI` `Docs`
 
-Turns repetitive translation tasks into a cleaner and more deliberate workflow, making content handling feel less mechanical and much easier to carry through from start to finish.
+A lightweight CLI and agent skill that keeps project documentation in sync with code changes. Instead of letting a model reread every doc and guess, it extracts changed tokens from a diff, flags stale and missing lines, and hands a read-only subagent the exact paths to review — running entirely locally with no API, secrets, or background service.
 
 <!-- Illustration slot reserved for a future transition image -->
 
