@@ -55,7 +55,7 @@ A lightweight CLI and agent skill that keeps project documentation in sync with 
 ## Activity
 
 <div align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=QianYan-Art&theme=default" alt="Activity Graph" />
+  <img src="./assets/activity.svg" alt="Activity Graph" />
 </div>
 
 ## Connect
