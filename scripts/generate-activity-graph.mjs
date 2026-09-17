@@ -4,6 +4,29 @@ import path from "node:path";
 const username = process.env.GITHUB_USERNAME || "QianYan-Art";
 const outputPath = process.env.ACTIVITY_GRAPH_OUTPUT || "assets/activity.svg";
 const token = process.env.GITHUB_TOKEN || "";
+const darkOutputPath = outputPath.replace(/\.svg$/i, "-dark.svg");
+
+// 两套配色各自固定，由 README 的 <picture> 按 GitHub 主题切换。
+// 不使用 prefers-color-scheme 媒体查询：它跟随的是系统主题，
+// 与 GitHub 站内主题可能不一致，会导致浅色图配深色底。
+const THEMES = {
+  light: {
+    title: "#334155",
+    meta: "#64748b",
+    axis: "#94a3b8",
+    grid: "#e8ecf2",
+    dot: "#bfdfff",
+    areaOpacity: 1,
+  },
+  dark: {
+    title: "#e6edf3",
+    meta: "#9aa4b2",
+    axis: "#7d8590",
+    grid: "#272d38",
+    dot: "#a9d2ff",
+    areaOpacity: 0.62,
+  },
+};
 
 const end = new Date();
 const toDate = formatDate(end);
@@ -137,7 +160,8 @@ function monthLabel(date) {
   }).format(new Date(`${date}T00:00:00Z`));
 }
 
-function buildSvg({ days, total }) {
+function buildSvg({ days, total }, themeName = "light") {
+  const theme = THEMES[themeName] ?? THEMES.light;
   const width = 860;
   const height = 220;
   const chartLeft = 48;
@@ -160,12 +184,12 @@ function buildSvg({ days, total }) {
     .map((ratio) => {
       const y = chartBottom - ratio * (chartBottom - chartTop);
       const value = Math.round(maxCount * ratio);
-      return `<line x1="${chartLeft}" y1="${y.toFixed(2)}" x2="${chartRight}" y2="${y.toFixed(2)}" stroke="#edf0f5"/><text x="${chartLeft - 10}" y="${y.toFixed(2)}" text-anchor="end" dominant-baseline="middle" fill="#94a3b8" font-size="10">${value}</text>`;
+      return `<line class="grid" x1="${chartLeft}" y1="${y.toFixed(2)}" x2="${chartRight}" y2="${y.toFixed(2)}"/><text class="axis" x="${chartLeft - 10}" y="${y.toFixed(2)}" text-anchor="end" dominant-baseline="middle" font-size="10">${value}</text>`;
     })
     .join("");
   const pointsMarkup = points
     .filter((point) => point.count > 0)
-    .map((point) => `<circle cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="1.8" fill="#bfdfff"/>`)
+    .map((point) => `<circle class="dot" cx="${point.x.toFixed(2)}" cy="${point.y.toFixed(2)}" r="1.8"/>`)
     .join("");
   const monthPoints = points
     .map((point, index) => ({ ...point, index }))
@@ -174,19 +198,39 @@ function buildSvg({ days, total }) {
     monthPoints.unshift({ ...points[0], index: 0 });
   }
   const monthsMarkup = monthPoints
-    .map((point) => `<text x="${point.x.toFixed(2)}" y="${height - 16}" fill="#94a3b8" font-size="10">${escapeXml(monthLabel(point.date))}</text>`)
+    .map((point) => `<text class="axis" x="${point.x.toFixed(2)}" y="${height - 16}" font-size="10">${escapeXml(monthLabel(point.date))}</text>`)
     .join("");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   <title>${escapeXml(username)} activity graph</title>
   <desc>${escapeXml(total)} contributions by day during the last year.</desc>
-  <rect width="${width}" height="${height}" rx="6" fill="#ffffff"/>
-  <text x="${chartLeft}" y="22" fill="#334155" font-size="14" font-weight="600">Activity</text>
-  <text x="${chartRight}" y="22" text-anchor="end" fill="#64748b" font-size="12">${escapeXml(total.toLocaleString("en-US"))} contributions in the last year</text>
+  <defs>
+    <linearGradient id="line-gradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8ca4ff"/>
+      <stop offset="55%" stop-color="#b3a5f5"/>
+      <stop offset="100%" stop-color="#f0a8c8"/>
+    </linearGradient>
+    <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b3a5f5" stop-opacity="0.38"/>
+      <stop offset="62%" stop-color="#f6c8d8" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#f6c8d8" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .title { fill: ${theme.title}; }
+    .meta { fill: ${theme.meta}; }
+    .axis { fill: ${theme.axis}; }
+    .grid { stroke: ${theme.grid}; }
+    .dot { fill: ${theme.dot}; }
+    .area { opacity: ${theme.areaOpacity}; }
+  </style>
+  <text class="title" x="${chartLeft}" y="22" font-size="14" font-weight="600">Activity</text>
+  <text class="meta" x="${chartRight}" y="22" text-anchor="end" font-size="12">${escapeXml(total.toLocaleString("en-US"))} contributions in the last year</text>
   ${grid}
-  <path d="${areaPath}" fill="#f6c8d8" fill-opacity="0.32"/>
-  <path d="${linePath}" fill="none" stroke="#8ca4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="area" d="${areaPath}" fill="url(#area-gradient)"/>
+  <path d="${linePath}" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   ${pointsMarkup}
   ${monthsMarkup}
 </svg>
@@ -195,7 +239,9 @@ function buildSvg({ days, total }) {
 
 const data = token ? await fetchGraphqlData() : await fetchHtmlData();
 data.days.sort((left, right) => left.date.localeCompare(right.date));
-const outputFile = path.resolve(process.cwd(), outputPath);
-await mkdir(path.dirname(outputFile), { recursive: true });
-await writeFile(outputFile, buildSvg(data), "utf8");
-console.log(`Wrote ${outputPath} for ${username}: ${data.total} contributions.`);
+for (const [target, themeName] of [[outputPath, "light"], [darkOutputPath, "dark"]]) {
+  const outputFile = path.resolve(process.cwd(), target);
+  await mkdir(path.dirname(outputFile), { recursive: true });
+  await writeFile(outputFile, buildSvg(data, themeName), "utf8");
+  console.log(`Wrote ${target} (${themeName}) for ${username}: ${data.total} contributions.`);
+}

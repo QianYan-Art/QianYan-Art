@@ -16,12 +16,12 @@
   </defs>
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-    .title { fill: #334155; }
-    .meta { fill: #64748b; }
-    .axis { fill: #94a3b8; }
-    .grid { stroke: #e8ecf2; }
-    .dot { fill: #bfdfff; }
-    .area { opacity: 1; }
+    .title { fill: #e6edf3; }
+    .meta { fill: #9aa4b2; }
+    .axis { fill: #7d8590; }
+    .grid { stroke: #272d38; }
+    .dot { fill: #a9d2ff; }
+    .area { opacity: 0.62; }
   </style>
   <text class="title" x="48" y="22" font-size="14" font-weight="600">Activity</text>
   <text class="meta" x="840" y="22" text-anchor="end" font-size="12">1,250 contributions in the last year</text>

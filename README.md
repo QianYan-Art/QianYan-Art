@@ -69,7 +69,10 @@ Around **550 downloads** between them so far.
 ## Activity
 
 <div align="center">
-  <img src="./assets/activity.svg" alt="Activity Graph" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/activity-dark.svg" />
+    <img src="./assets/activity.svg" alt="Activity Graph" />
+  </picture>
 </div>
 
 ---
