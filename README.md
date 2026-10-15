@@ -61,8 +61,8 @@ Supports safetensors and GGUF containers across Qwen2 / Qwen3 / Qwen3.5 text mod
 
 ## On Hugging Face
 
-- [**TS-Dataset**](https://huggingface.co/datasets/suyuan37/TS-Dataset) — SFT + DPO Chinese corpus for traffic-accident analysis, built from scratch across five categories (10K–100K rows, MIT)
-- [**SafetyRAISE-TS-Qwen3**](https://huggingface.co/suyuan37/SafetyRAISE-TS-Qwen3) — the fine-tuned expert small model behind SafetyRAISE
+- [**TS-Dataset**](https://huggingface.co/shiqianyan/SafetyRAISE-TS-Qwen3) — SFT + DPO Chinese corpus for traffic-accident analysis, built from scratch across five categories
+- [**SafetyRAISE-TS-Qwen3**](https://huggingface.co/shiqianyan/SafetyRAISE-TS-Qwen3) — the fine-tuned expert small model behind SafetyRAISE
 
 <!-- Illustration slot reserved for a future transition image -->
 
